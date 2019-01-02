@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Bio&#39;s blog">
 <meta property="og:description" content="附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-02T08:28:41.738Z">
+<meta property="og:updated_time" content="2019-01-02T08:36:21.215Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo+github搭建免费个人博客粗略教程">
 <meta name="twitter:description" content="附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面">
@@ -178,11 +178,16 @@
 <h2 id="特别提示"><a href="#特别提示" class="headerlink" title="特别提示"></a>特别提示</h2><blockquote>
 <p>很多命令既可以用Windows的cmd来完成，也可以使用git bash来完成，但是部分命令会有一些问题，为避免不必要的问题，建议全部使用git bash来执行；<br>hexo不同版本差别比较大，网上很多文章的配置信息都是基于2.x的，所以注意不要被误导；最好的话还是查看<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">官方文档</a><br>hexo有2种_config.yml文件，一个是根目录下的全局的_config.yml，一个是各个theme下的；</p>
 </blockquote>
-<h2 id="配置SSH-Key"><a href="#配置SSH-Key" class="headerlink" title="配置SSH Key"></a>配置SSH Key</h2><p>提交代码肯定要拥有你的github权限才可以，但是直接使用用户名和密码太不安全了，所以我们使用ssh key来解决本地和服务器的连接问题。<br>运行命令检查本机是否已存在的ssh密钥<br>    $ cd ~/. ssh<br>如果提示：No such file or directory 说明你是第一次使用git。需要运行下面的命令<br>    ssh-keygen -t rsa -C “邮件地址”<br>然后连续3次回车，（这里如果想要设置密码的话可以根据提示设置，如果不想直接回车即可）最终会生成一个文件在用户目录下，打开用户目录，找到.ssh\id_rsa.pub文件，记事本打开并复制里面的内容，打开你的github主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key。<br>将刚复制的内容粘贴到key那里，title随便填，保存。</p>
+<h2 id="配置SSH-Key"><a href="#配置SSH-Key" class="headerlink" title="配置SSH Key"></a>配置SSH Key</h2><p>提交代码肯定要拥有你的github权限才可以，但是直接使用用户名和密码太不安全了，所以我们使用ssh key来解决本地和服务器的连接问题。<br>运行命令检查本机是否已存在的ssh密钥</p>
+<pre><code>$ cd ~/. ssh 
+</code></pre><p>如果提示：No such file or directory 说明你是第一次使用git。需要运行下面的命令</p>
+<pre><code>ssh-keygen -t rsa -C &quot;邮件地址&quot;
+</code></pre><p>然后连续3次回车（这里如果想要设置密码的话可以根据提示设置，如果不想直接回车即可），最终会生成一个文件在用户目录下，打开用户目录，找到.ssh\id_rsa.pub文件，记事本打开并复制里面的内容，打开你的github主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key。<br>将刚复制的内容粘贴到key那里，title随便填，保存。</p>
 <blockquote>
-<p>然后我们测试一下<br>    $ ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a> # 注意邮箱地址不用改</p>
+<p>然后我们测试一下</p>
 </blockquote>
-<p>如果提示Are you sure you want to continue connecting (yes/no)?，输入yes。若出现提示成功的信息则为配置成功，此时你需要配置：</p>
+<pre><code>$ ssh -T git@github.com # 注意邮箱地址不用改
+</code></pre><p>如果提示Are you sure you want to continue connecting (yes/no)?，输入yes。若出现提示成功的信息则为配置成功，此时你需要配置：</p>
 <pre><code>$ git config --global user.name &quot;biobin&quot;// 你的github用户名，非昵称
 $ git config --global user.email  &quot;xxx@qq.com&quot;// 填写你的github注册邮箱
 </code></pre><h2 id="开启hexo博客之旅"><a href="#开启hexo博客之旅" class="headerlink" title="开启hexo博客之旅"></a>开启hexo博客之旅</h2><h3 id="4-1-hexo简介"><a href="#4-1-hexo简介" class="headerlink" title="4.1 hexo简介"></a>4.1 hexo简介</h3><p>Hexo是一个简单、快速、强大的基于 Github Pages 的博客发布工具，支持Markdown格式，有众多优秀插件和主题。</p>
@@ -190,7 +195,8 @@ $ git config --global user.email  &quot;xxx@qq.com&quot;// 填写你的github注
 <p>官网： <a href="http://hexo.io" target="_blank" rel="noopener">http://hexo.io</a><br>github: <a href="https://github.com/hexojs/hexo" target="_blank" rel="noopener">https://github.com/hexojs/hexo</a><br>官方文档：<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/</a></p>
 </blockquote>
 <h3 id="4-2-原理"><a href="#4-2-原理" class="headerlink" title="4.2 原理"></a>4.2 原理</h3><p>由于github pages存放的都是静态文件，博客存放的不只是文章内容，还有文章列表、分类、标签、翻页等动态内容，假如每次写完一篇文章都要手动更新博文目录和相关链接信息，相信谁都会疯掉，所以hexo所做的就是将这些md文件都放在本地，每次写完文章后调用写好的命令来批量完成相关页面的生成，然后再将有改动的页面提交到github。</p>
-<h3 id="4-3-安装"><a href="#4-3-安装" class="headerlink" title="4.3 安装"></a>4.3 安装</h3><pre><code>$ npm install -g hexo
+<h3 id="4-3-安装"><a href="#4-3-安装" class="headerlink" title="4.3 安装"></a>4.3 安装</h3><p>在cmd中运行以下命令</p>
+<pre><code>$ npm install -g hexo
 </code></pre><h3 id="4-4-初始化"><a href="#4-4-初始化" class="headerlink" title="4.4 初始化"></a>4.4 初始化</h3><p>在电脑的某个地方新建一个名为hexo的文件夹（名字可以随便取），比如我的是F:\hexo，由于这个文件夹将来就作为你存放代码的地方，所以最好不要随便放。</p>
 <pre><code>$ cd /f/hexo/
 $ hexo init
